@@ -31,7 +31,7 @@
     const saved = store.get('adapt-cover');
     const field = (key, label) => {
       const v = CFG[key] || saved[key] || '';
-      return `<div class="cf"><span class="cl">${label}</span><span class="cv${CFG[key] ? ' fixed' : ''}" data-f="${key}" ${CFG[key] ? '' : 'contenteditable="plaintext-only" spellcheck="false"'} data-ph="اكتب هنا">${esc(v)}</span></div>`;
+      return `<div class="cf"><span class="cl">${label}</span><span class="cv${CFG[key] ? ' fixed' : ''}" data-f="${key}" ${key === 'studentId' ? 'dir="ltr"' : ''} ${CFG[key] ? '' : 'contenteditable="plaintext-only" spellcheck="false"'} data-ph="اكتب هنا">${esc(v)}</span></div>`;
     };
     return frame(1, 'cover', `
       <div class="sky"><span class="sun"></span><span class="cloud a"></span><span class="cloud b"></span></div>
