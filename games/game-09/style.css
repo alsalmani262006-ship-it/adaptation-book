@@ -1,0 +1,16 @@
+.track { position: relative; padding: 14px 14px 14px 64px; margin-bottom: 18px; border-radius: 24px; background: #3b4252; box-shadow: var(--shadow); }
+.finish { position: absolute; top: 0; bottom: 0; left: 0; width: 56px; display: grid; place-items: center; font-size: 2rem; border-radius: 24px 0 0 24px; background: repeating-conic-gradient(#fff 0 25%, #222 0 50%) 0 0 / 20px 20px; }
+.lane { position: relative; height: 64px; margin: 8px 0; border-radius: 14px; background: #575f72; border-top: 3px dashed #c9ced8; }
+.lane:last-child { border-bottom: 3px dashed #c9ced8; }
+.who { position: absolute; top: 4px; inset-inline-end: 10px; color: #fff; font-weight: 800; font-size: .85rem; opacity: .8; }
+.car { position: absolute; top: 6px; inset-inline-start: 0; font-size: 2.6rem; line-height: 1; transition: inset-inline-start .6s cubic-bezier(.3, .8, .3, 1.2); filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .4)); }
+#me { animation: idle .5s infinite alternate; }
+@keyframes idle { to { transform: translateY(-2px); } }
+.q { text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 16px; }
+.q p { margin: 0; font-size: 1.3rem; font-weight: 800; line-height: 1.8; }
+.q small { color: var(--ink-soft); font-weight: 700; }
+.q .state { color: var(--ink-soft); font-size: 1.1rem; }
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.big { min-height: 66px; font-size: 1.4rem; border-radius: 20px; }
+.no { background: var(--bad); }
+#explain { min-height: 70px; }

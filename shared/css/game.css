@@ -1,0 +1,89 @@
+/* واجهة الألعاب المشتركة */
+body.game { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; background: var(--theme-soft, var(--violet-soft)); overflow-x: hidden; }
+body.game::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--theme, var(--violet)) 18%, transparent) 0 120px, transparent 121px),
+    radial-gradient(circle at 6% 92%, color-mix(in srgb, var(--yellow) 30%, transparent) 0 160px, transparent 161px);
+}
+
+.g-bar {
+  position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+  border-bottom: 4px solid var(--theme, var(--violet));
+}
+.g-back { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 700; background: var(--bg); white-space: nowrap; }
+.g-title { flex: 1; min-width: 0; margin: 0; font-size: 1.1rem; font-weight: 800; line-height: 1.3; }
+.g-title small { display: block; font-size: .78rem; font-weight: 600; color: var(--ink-soft); }
+.g-score { display: inline-flex; align-items: center; gap: 4px; padding: 4px 14px; border-radius: 999px; background: var(--yellow); font-weight: 900; font-size: 1.1rem; white-space: nowrap; }
+.g-score.bump { animation: bump .45s; }
+.g-icon { width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--bg); font-size: 1.15rem; display: grid; place-items: center; flex: none; }
+@media (max-width: 560px) {
+  .g-bar { gap: 6px; padding: 6px 8px; }
+  .g-back { padding: 6px 8px; }
+  .g-back span { display: none; }
+  .g-title { font-size: .88rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .g-title small { display: none; }
+  .g-score { padding: 3px 10px; font-size: 1rem; }
+  .g-icon { width: 34px; height: 34px; font-size: 1rem; }
+  .g-main { padding: 12px 12px 32px; }
+  .g-prompt { font-size: 1rem; padding: 10px 12px; }
+}
+
+.g-main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 18px 16px 40px; }
+.g-prompt {
+  margin: 0 0 16px; padding: 14px 18px; border-radius: var(--radius); background: #fff; box-shadow: var(--shadow);
+  font-weight: 700; font-size: 1.15rem; text-align: center; border-inline-start: 8px solid var(--theme, var(--violet));
+}
+.g-progress { height: 10px; border-radius: 99px; background: rgba(0, 0, 0, .08); overflow: hidden; margin: 0 0 16px; }
+.g-progress > i { display: block; height: 100%; width: 0; background: var(--theme, var(--violet)); border-radius: 99px; transition: width .4s; }
+
+.card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+.choices { display: grid; gap: 12px; }
+.choice {
+  min-height: 56px; padding: 10px 16px; border-radius: 14px; border: 3px solid var(--line); background: #fff;
+  font-weight: 700; font-size: 1.05rem; text-align: start; transition: transform .12s, border-color .12s, background .12s;
+}
+.choice:hover { border-color: var(--theme, var(--violet)); transform: translateY(-2px); }
+.is-ok { border-color: var(--ok) !important; background: var(--ok-soft) !important; animation: pop .4s; }
+.is-bad { border-color: var(--bad) !important; background: var(--bad-soft) !important; animation: shake .45s; }
+.is-sel { border-color: var(--theme, var(--violet)) !important; box-shadow: 0 0 0 4px color-mix(in srgb, var(--theme, var(--violet)) 30%, transparent) !important; }
+
+/* السحب */
+.draggable { touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.drag-ghost { position: fixed; z-index: 1000; pointer-events: none; transform: translate(-50%, -50%) scale(1.06) rotate(-2deg); box-shadow: 0 14px 30px rgba(0, 0, 0, .25); opacity: .95; }
+.drop-hover { outline: 4px dashed var(--theme, var(--violet)); outline-offset: 4px; }
+
+/* الطبقات المنبثقة */
+.g-overlay { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(20, 28, 40, .55); animation: fade .25s; }
+.g-modal { width: min(560px, 100%); max-height: 92vh; overflow: auto; background: #fff; border-radius: 26px; padding: 26px 22px; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, .3); animation: rise .35s cubic-bezier(.2, .9, .3, 1.3); }
+.g-modal h2 { margin: 0 0 6px; font-size: 1.6rem; font-weight: 900; color: var(--theme, var(--violet)); }
+.g-modal .goal { margin: 0 0 12px; padding: 10px 14px; border-radius: 14px; background: var(--theme-soft, var(--violet-soft)); font-weight: 700; }
+.g-modal ol { text-align: start; margin: 0 0 18px; padding-inline-start: 1.4em; }
+.g-modal ol li { margin: 4px 0; }
+.g-modal .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.g-badge { width: 92px; height: 92px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; font-size: 3rem; background: var(--theme-soft, var(--violet-soft)); }
+.stars { font-size: 2.6rem; letter-spacing: 6px; margin: 4px 0; }
+.stars .off { filter: grayscale(1); opacity: .3; }
+.stars span { display: inline-block; animation: pop .5s backwards; }
+.stars span:nth-child(2) { animation-delay: .15s; }
+.stars span:nth-child(3) { animation-delay: .3s; }
+
+.g-toast {
+  position: fixed; inset-inline: 0; bottom: 22px; z-index: 60; margin: auto; width: fit-content; max-width: calc(100% - 32px);
+  padding: 10px 20px; border-radius: 999px; color: #fff; font-weight: 800; box-shadow: var(--shadow); animation: toast 1.8s forwards; text-align: center;
+}
+.g-toast.ok { background: var(--ok); }
+.g-toast.bad { background: var(--bad); }
+.g-toast.info { background: var(--ink); }
+.g-explain { margin-top: 12px; padding: 12px 16px; border-radius: 14px; background: var(--ok-soft); border: 2px solid var(--ok); font-weight: 600; animation: rise .3s; }
+.g-explain.bad { background: var(--bad-soft); border-color: var(--bad); }
+
+#g-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; }
+
+@keyframes pop { 0% { transform: scale(.8); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+@keyframes bump { 50% { transform: scale(1.25); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(24px) scale(.96); } }
+@keyframes toast { 0% { opacity: 0; transform: translateY(20px); } 12%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(10px); } }

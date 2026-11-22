@@ -1,0 +1,26 @@
+.g-prompt small { display: block; color: var(--ink-soft); font-weight: 600; font-size: .9rem; }
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
+.scene { position: relative; overflow: hidden; border-radius: 26px; padding: 18px; background: linear-gradient(180deg, #2c3e74 0%, #8a6fb5 45%, #f3c98b 80%, #e9b264 100%); box-shadow: var(--shadow); }
+.moon { position: absolute; top: 18px; inset-inline-start: 22px; width: 54px; height: 54px; border-radius: 50%; background: #fff6d8; box-shadow: 0 0 30px #fff6d8; }
+.foxwrap { position: relative; max-width: 420px; margin: 30px auto 0; }
+.foxwrap svg { display: block; width: 100%; height: auto; }
+.foxwrap .glow { filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 10px #ffd34d); }
+.num { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; display: grid; place-items: center; background: var(--sand); color: #fff; font-weight: 900; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, .3); font-size: .95rem; }
+.num.found { background: var(--ok); animation: pop .4s; }
+.slots { display: grid; gap: 10px; }
+.slot { display: grid; grid-template-columns: 34px 1fr; gap: 2px 10px; align-items: center; padding: 10px 12px; border-radius: 16px; background: #fff; border: 3px dashed var(--line); box-shadow: var(--shadow); }
+.slot .n { grid-row: span 2; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--sand-soft); color: var(--sand); font-weight: 900; }
+.slot p { margin: 0; font-weight: 700; line-height: 1.5; }
+.slot .ans { color: var(--ink-soft); font-weight: 600; font-size: .85rem; }
+.slot[data-done] { border-style: solid; border-color: var(--ok); }
+.slot[data-done] .ans { color: var(--ok); font-size: 1rem; font-weight: 900; }
+.chips { position: sticky; bottom: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 16px; padding: 12px; border-radius: 20px; background: rgba(255, 255, 255, .92); box-shadow: var(--shadow); z-index: 5; }
+.chips:empty { display: none; }
+.chip { padding: 8px 16px; border-radius: 999px; background: var(--sand); color: #fff; font-weight: 800; box-shadow: 0 4px 0 #b76718; border: 3px solid transparent; }
+#explain { min-height: 70px; }
+@media (max-width: 560px) {
+  .chips { gap: 6px; padding: 8px; }
+  .chip { padding: 4px 10px; font-size: .82rem; box-shadow: 0 3px 0 #b76718; }
+  .foxwrap { margin-top: 10px; }
+}

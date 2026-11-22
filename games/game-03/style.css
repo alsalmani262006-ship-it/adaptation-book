@@ -1,0 +1,8 @@
+.sentence { font-size: 1.45rem; line-height: 2.3; text-align: center; padding: 28px 20px; margin-bottom: 20px; font-weight: 700; }
+.blank { display: inline-block; min-width: 150px; margin: 0 6px; padding: 0 14px; border-bottom: 4px dashed var(--violet); border-radius: 10px; color: var(--violet); background: var(--violet-soft); line-height: 1.8; }
+.blank.filled { border-bottom-style: solid; border-color: var(--ok); color: var(--ok); background: var(--ok-soft); }
+.bank { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.word { min-height: 50px; padding: 6px 18px; border-radius: 14px; border: 3px solid var(--line); background: #fff; font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 0 var(--line); transition: transform .12s; }
+.word:hover { transform: translateY(-2px); border-color: var(--violet); }
+.word.used { opacity: .35; text-decoration: line-through; box-shadow: none; }
+@media (max-width: 560px) { .sentence { font-size: 1.15rem; } .blank { min-width: 100px; } }

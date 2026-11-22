@@ -1,0 +1,18 @@
+.tray { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; min-height: 120px; padding: 14px; margin-bottom: 18px; border-radius: var(--radius); background: rgba(255, 255, 255, .6); border: 3px dashed var(--line); }
+.token { width: 132px; padding: 8px; border-radius: 16px; background: #fff; box-shadow: var(--shadow); text-align: center; border: 3px solid transparent; transition: transform .15s; }
+.token:hover { transform: translateY(-3px) rotate(-1deg); }
+.token .pic { display: grid; place-items: center; height: 74px; }
+.token .pic svg { max-height: 74px; width: auto; }
+.token b { display: block; font-size: .9rem; line-height: 1.4; }
+.token.placed { width: 96px; padding: 4px; box-shadow: none; cursor: default; border-color: var(--ok); }
+.token.placed .pic { height: 46px; }
+.token.placed .pic svg { max-height: 46px; }
+.token.placed b { font-size: .72rem; }
+.zones { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
+.zones.z3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 620px) { .zones.z3 { grid-template-columns: 1fr; } }
+.zone { min-height: 170px; padding: 12px; border-radius: 22px; background: #fff; box-shadow: var(--shadow); text-align: center; border: 3px solid transparent; transition: background .2s; }
+.zone .zicon { display: block; width: 110px; margin: 0 auto 4px; }
+.zone b { font-size: 1.05rem; }
+.zone .got { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 6px; }
+.why { min-height: 60px; }
