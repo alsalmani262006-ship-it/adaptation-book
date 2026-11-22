@@ -2,7 +2,7 @@
 // يشترط وجود روابط النشر الحقيقية في qr/qr-data.js (تُولَّد بـ npm run qr -- <الرابط>).
 // للمسودة المحلية فقط: npm run pdf -- --draft  (تُحفظ باسم مختلف وروابطها محلية)
 import { chromium } from 'playwright-core';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { startServer } from './serve.mjs';
@@ -49,4 +49,8 @@ if (!draft) {
   if (missing.length) { console.error('✘ روابط ألعاب غير موجودة في PDF:\n  ' + missing.join('\n  ')); process.exit(1); }
   console.log('  ✓ جميع روابط «افتح اللعبة» تشير إلى الروابط المنشورة:');
   [...new Set(uris)].forEach(u => console.log('   ', u));
+  // نسخة للتنزيل من الموقع المنشور
+  mkdirSync(join(root, 'downloads'), { recursive: true });
+  copyFileSync(out, join(root, 'downloads', 'adaptation-book.pdf'));
+  console.log('  ✓ نُسخ إلى downloads/adaptation-book.pdf');
 }

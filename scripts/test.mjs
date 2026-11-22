@@ -1,5 +1,5 @@
 // اختبار آلي للكتاب والألعاب في متصفح حقيقي (Edge أو Chrome المثبّت على الجهاز)
-// الاستخدام: node scripts/test.mjs [--shots <مجلد>] [--only 3,4]
+// الاستخدام: node scripts/test.mjs [--shots <مجلد>] [--only 3,4] [--book] [--base https://…/]  (--base يختبر النسخة المنشورة)
 import { chromium } from 'playwright-core';
 import { mkdirSync } from 'node:fs';
 import { startServer } from './serve.mjs';
@@ -10,9 +10,11 @@ const bookOnly = args.includes('--book');
 const only = bookOnly ? [] : args.includes('--only') ? args[args.indexOf('--only') + 1].split(',').map(Number) : null;
 if (shots) mkdirSync(shots, { recursive: true });
 
+const remote = args.includes('--base') ? args[args.indexOf('--base') + 1].replace(/\/$/, '') : null;
 const PORT = 8765;
-const server = await startServer(PORT);
-const base = `http://localhost:${PORT}`;
+const server = remote ? null : await startServer(PORT);
+const base = remote || `http://localhost:${PORT}`;
+console.log('الاختبار على: ' + base);
 const browser = await chromium.launch({ channel: process.env.BROWSER || 'msedge' }).catch(() => chromium.launch({ channel: 'chrome' }));
 
 let failures = 0;
@@ -151,7 +153,7 @@ if (!only || bookOnly) {
 }
 
 await browser.close();
-server.closeAllConnections(); server.close();
+if (server) { server.closeAllConnections(); server.close(); }
 console.log('\n' + (failures ? `✘ ${failures} مشكلة` : '✔ نجحت جميع الاختبارات'));
 if (results.length) console.log(`الألعاب العاملة: ${results.filter(r => r[1]).length} من ${results.length}`);
 process.exit(failures ? 1 : 0);
