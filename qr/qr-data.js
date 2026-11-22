@@ -1,7 +1,7 @@
 // مولَّد تلقائيًا بواسطة scripts/build-qr.mjs — لا تعدّله يدويًا
 window.QR_DATA = {
   "base": "https://alsalmani262006-ship-it.github.io/adaptation-book/",
-  "generated": "2026-11-22T12:47:23.102Z",
+  "generated": "2026-11-22T12:56:02.279Z",
   "book": {
     "url": "https://alsalmani262006-ship-it.github.io/adaptation-book/book/index.html",
     "svg": "qr/book.svg"

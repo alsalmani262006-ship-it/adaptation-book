@@ -15,7 +15,7 @@ if (!base.endsWith('/')) base += '/';
 
 const outDir = join(root, 'qr');
 mkdirSync(outDir, { recursive: true });
-const opts = { type: 'svg', margin: 1, errorCorrectionLevel: 'M', color: { dark: '#1d2a3a', light: '#ffffff' } };
+const opts = { type: 'svg', margin: 2, errorCorrectionLevel: 'M', color: { dark: '#1d2a3a', light: '#ffffff' } };
 
 const data = { base, generated: new Date().toISOString(), book: null, games: {} };
 const bookUrl = base + 'book/index.html';
